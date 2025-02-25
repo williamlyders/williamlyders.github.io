@@ -1,51 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
-    <title> ML6.dk  </title>
-    <link rel="icon" type="image/x-icon" href="mim.ico">
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Counter</title>
+    <title>Statisk Tæller med Cookies</title>
+</head>
+<body>
+    <h1>Statisk Tæller med Cookies</h1>
+    <p>Tæller: <span id="counter">0</span></p>
+    <button onclick="resetCounter()">Nulstil</button>
+
     <script>
-        function loadCounter() {
-            let startDate = localStorage.getItem("start_date");
-            if (!startDate) {
-                startDate = new Date().toISOString().split('T')[0];
-                localStorage.setItem("start_date", startDate);
+        function getCookie(name) {
+            let cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                let [key, value] = cookie.split('=');
+                if (key === name) return value;
             }
-            return new Date(startDate);
+            return null;
         }
 
-        function saveCounter(startDate) {
-            localStorage.setItem("start_date", startDate.toISOString().split('T')[0]);
-        }
-
-        function getDayCount(startDate) {
-            const today = new Date();
-            const diffTime = today - startDate;
-            return Math.floor(diffTime / (1000));
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + value + expires + "; path=/";
         }
 
         function updateCounter() {
-            const startDate = loadCounter();
-            document.getElementById("counter").innerText = Dage siden vi sidst talte om pik til madklub: ${getDayCount(startDate)};
+            let counter = parseInt(getCookie("counter")) || 0;
+            counter++;
+            setCookie("counter", counter, 365);
+            document.getElementById("counter").textContent = counter;
         }
 
         function resetCounter() {
-            const today = new Date();
-            saveCounter(today);
+            setCookie("counter", 0, 365);
             updateCounter();
         }
-    </script>
-</head>
-<body onload="updateCounter()">
-    
-    <a href="index.html">HJEM</a>
 
-    <br>
-    
-    <h1 id="counter">Dage siden vi sidst talte om pik til madklub: 0</h1>
-    <button onclick="resetCounter()">Reset Counter</button>
+        setInterval(updateCounter, 1000);
+        updateCounter();
+    </script>
 </body>
 </html>
