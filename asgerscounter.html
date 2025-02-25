@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Statisk Tæller med Cookies</title>
+    <title>Dage siden vi sidst tale om pik til madklub</title>
 </head>
 <body>
-    <h1>Statisk Tæller med Cookies</h1>
-    <p>Tæller: <span id="counter">0</span></p>
-    <button onclick="resetCounter()">Nulstil</button>
+    <h1>DAGE SIDEN VI SIDST TALTE OM PIK TIL MADKLUB</h1>
+    <p>DAGE SIDEN SAMTALE EMNET: <span id="counter">0</span></p>
+    <button onclick="resetCounter()">HVOR ER VI YNKELIGE</button>
 
     <script>
         function getCookie(name) {
@@ -32,18 +32,25 @@
 
         function updateCounter() {
             let counter = parseInt(getCookie("counter")) || 0;
-            counter++;
-            setCookie("counter", counter, 365);
+            let lastDate = getCookie("lastDate");
+            let currentDate = new Date().toDateString();
+
+            if (lastDate !== currentDate) {
+                counter++;
+                setCookie("counter", counter, 365);
+                setCookie("lastDate", currentDate, 365);
+            }
             document.getElementById("counter").textContent = counter;
         }
 
         function resetCounter() {
             setCookie("counter", 0, 365);
+            setCookie("lastDate", "", 365);
             updateCounter();
         }
 
-        setInterval(updateCounter, 1000);
         updateCounter();
+        setInterval(updateCounter, 86400000); // Opdater hver dag (24 timer)
     </script>
 </body>
 </html>
