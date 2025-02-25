@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Counter</title>
+    <script>
+        function loadCounter() {
+            let startDate = localStorage.getItem("start_date");
+            if (!startDate) {
+                startDate = new Date().toISOString().split('T')[0];
+                localStorage.setItem("start_date", startDate);
+            }
+            return new Date(startDate);
+        }
+
+        function saveCounter(startDate) {
+            localStorage.setItem("start_date", startDate.toISOString().split('T')[0]);
+        }
+
+        function getDayCount(startDate) {
+            const today = new Date();
+            const diffTime = today - startDate;
+            return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        }
+
+        function updateCounter() {
+            const startDate = loadCounter();
+            document.getElementById("counter").innerText = Dage siden vi sidst talte om pik til madklub: ${getDayCount(startDate)};
+        }
+
+        function resetCounter() {
+            const today = new Date();
+            saveCounter(today);
+            updateCounter();
+        }
+    </script>
+</head>
+<body onload="updateCounter()">
+    <h1 id="counter">Dage siden vi sidst talte om pik til madklub: 0</h1>
+    <button onclick="resetCounter()">Reset Counter</button>
+</body>
+</html>
