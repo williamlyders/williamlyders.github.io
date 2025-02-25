@@ -40,7 +40,7 @@
         }
 
         function updateCounter() {
-            let counter = parseInt(getCookie("counter")) || -1;
+            let counter = parseInt(getCookie("counter")) || 0;
             let lastDate = getCookie("lastDate");
             let currentDate = new Date().toDateString();
 
