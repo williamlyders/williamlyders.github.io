@@ -53,7 +53,7 @@
         }
 
         function resetCounter() {
-            setCookie("counter", 0, 365);
+            setCookie("counter", (-1), 365);
             setCookie("lastDate", "", 365);
             updateCounter();
         }
