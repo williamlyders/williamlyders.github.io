@@ -37,19 +37,19 @@
   // Få dagen på måneden
   const dagen = idag.getDate()
   //vælg element i listen
-  const status = liste[dagen]
+  const status = liste[dagen-1]
   
   // Vurder ud fra status
   if (status == 0) {
-    document.getElementById("dag").innerHTML = "Tilstand stabil. Benyt standard trappesikkerhedsprotokol.";
+    document.getElementById("dag").innerHTML = "🟢🟢🟢 TILSTAND STABIL. Benyt standard trappesikkerhedsprotokol 🟢🟢🟢";
     document.getElementById("img").src = "walking.jpg";
   }
   if (status == 1) {
-    document.getElementById("dag").innerHTML = "Usikker. Udvis øget forsikkerhed ved brug af trappen.";
+    document.getElementById("dag").innerHTML = "🟡🟡🟡 TILSTAND USIKKER. Udvis øget forsikkerhed ved brug af trappen 🟡🟡🟡";
     document.getElementById("img").src = "paspå.jpeg";
   }
   if (status == 2) {
-    document.getElementById("dag").innerHTML = "Tilstand kritisk. For gud skyld, brug elevator eller forbliv på køkkenet.";
+    document.getElementById("dag").innerHTML = "🔴🔴🔴 TILSTAND KRITISK! For gud skyld, brug elevator eller forbliv på køkkenet 🔴🔴🔴";
     document.getElementById("img").src = "falling.jpg";
   }
   
