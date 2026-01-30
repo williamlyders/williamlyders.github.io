@@ -9,6 +9,9 @@
 <a href="index.html">HJEM</a>
 
 <br>
-<iframe src="https://docs.google.com/spreadsheets/d/19Q4tsMIIXPc-qFEtAdaugtQip3k3xjKFrR9WV-Alofk/edit?gid=162241931#gid=162241931" style="border:solid 1px #777" width="1100" height="700" frameborder="0" scrolling="no"></iframe>
-
+<iframe
+  src="https://docs.google.com/spreadsheets/d/e/PASTE_PUBLISHED_ID_HERE/pubhtml?widget=true&amp;headers=false"
+  width="1100"
+  height="700">
+</iframe>
 </body>
